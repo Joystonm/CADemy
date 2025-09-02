@@ -1,0 +1,75 @@
+{
+  "presets": {
+    "materials": [
+      {
+        "name": "Default",
+        "color": "#888888",
+        "metalness": 0.1,
+        "roughness": 0.7
+      },
+      {
+        "name": "Metal",
+        "color": "#C0C0C0",
+        "metalness": 0.9,
+        "roughness": 0.1
+      },
+      {
+        "name": "Plastic",
+        "color": "#FF6B6B",
+        "metalness": 0.0,
+        "roughness": 0.8
+      },
+      {
+        "name": "Glass",
+        "color": "#87CEEB",
+        "metalness": 0.0,
+        "roughness": 0.0,
+        "transparent": true,
+        "opacity": 0.3
+      }
+    ],
+    "shapes": [
+      {
+        "name": "Unit Cube",
+        "type": "cube",
+        "dimensions": [1, 1, 1]
+      },
+      {
+        "name": "Unit Sphere",
+        "type": "sphere",
+        "radius": 1
+      },
+      {
+        "name": "Standard Cylinder",
+        "type": "cylinder",
+        "radiusTop": 1,
+        "radiusBottom": 1,
+        "height": 2
+      }
+    ],
+    "scenes": [
+      {
+        "name": "Empty Scene",
+        "objects": [],
+        "camera": {
+          "position": [5, 5, 5],
+          "target": [0, 0, 0]
+        }
+      },
+      {
+        "name": "Basic Setup",
+        "objects": [
+          {
+            "type": "cube",
+            "position": [0, 0, 0],
+            "material": "Default"
+          }
+        ],
+        "camera": {
+          "position": [3, 3, 3],
+          "target": [0, 0, 0]
+        }
+      }
+    ]
+  }
+}

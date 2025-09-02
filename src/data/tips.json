@@ -1,0 +1,132 @@
+{
+  "tips": [
+    {
+      "id": 1,
+      "category": "navigation",
+      "title": "Camera Controls",
+      "content": "Use left mouse button to rotate, right mouse button to pan, and scroll wheel to zoom in and out of the 3D scene.",
+      "icon": "🖱️"
+    },
+    {
+      "id": 2,
+      "category": "modeling",
+      "title": "Grid Snapping",
+      "content": "Enable grid snapping to align your objects perfectly. This helps create more precise models and maintains consistency.",
+      "icon": "🧲"
+    },
+    {
+      "id": 3,
+      "category": "workflow",
+      "title": "Save Often",
+      "content": "Remember to save your work frequently. Use Ctrl+S to quickly save your current project to avoid losing progress.",
+      "icon": "💾"
+    },
+    {
+      "id": 4,
+      "category": "modeling",
+      "title": "Boolean Operations",
+      "content": "Use union to combine shapes, subtract to cut holes, and intersect to keep only overlapping parts. These are powerful tools for complex designs.",
+      "icon": "🔧"
+    },
+    {
+      "id": 5,
+      "category": "interface",
+      "title": "Properties Panel",
+      "content": "The properties panel shows detailed information about your selected object. You can modify position, rotation, and scale values directly.",
+      "icon": "📊"
+    },
+    {
+      "id": 6,
+      "category": "accessibility",
+      "title": "Design for All Users",
+      "content": "When creating assistive technology, consider different abilities and needs. Test your designs with various user scenarios in mind.",
+      "icon": "♿"
+    },
+    {
+      "id": 7,
+      "category": "accessibility",
+      "title": "Ergonomic Considerations",
+      "content": "For grip-based tools, ensure handles are thick enough (2cm+) for users with arthritis. Smooth edges prevent injury and discomfort.",
+      "icon": "🤏"
+    },
+    {
+      "id": 8,
+      "category": "modeling",
+      "title": "Start Simple",
+      "content": "Begin with basic shapes and gradually add complexity. It's easier to combine simple shapes than to modify complex ones.",
+      "icon": "🔺"
+    },
+    {
+      "id": 9,
+      "category": "workflow",
+      "title": "Use Layers",
+      "content": "Organize your objects into layers for better management. This is especially helpful for complex assemblies.",
+      "icon": "📚"
+    },
+    {
+      "id": 10,
+      "category": "accessibility",
+      "title": "Test Your Designs",
+      "content": "Always consider how someone with limited mobility would use your design. Can it be operated with one hand? Is it stable?",
+      "icon": "🧪"
+    },
+    {
+      "id": 11,
+      "category": "modeling",
+      "title": "Material Selection",
+      "content": "Choose appropriate materials for your design context. Consider durability, safety, and manufacturing constraints.",
+      "icon": "🎨"
+    },
+    {
+      "id": 12,
+      "category": "workflow",
+      "title": "Keyboard Shortcuts",
+      "content": "Learn keyboard shortcuts to speed up your workflow: G (move), R (rotate), S (scale), V (select), Del (delete).",
+      "icon": "⌨️"
+    }
+  ],
+  "categories": {
+    "navigation": {
+      "name": "Navigation",
+      "description": "Moving around the 3D space",
+      "color": "#3B82F6"
+    },
+    "modeling": {
+      "name": "3D Modeling",
+      "description": "Creating and modifying 3D objects",
+      "color": "#10B981"
+    },
+    "workflow": {
+      "name": "Workflow",
+      "description": "Efficient working practices",
+      "color": "#F59E0B"
+    },
+    "interface": {
+      "name": "Interface",
+      "description": "Using the CADemy interface",
+      "color": "#8B5CF6"
+    },
+    "accessibility": {
+      "name": "Accessibility",
+      "description": "Designing for assistive technology",
+      "color": "#EF4444"
+    }
+  },
+  "contextualTips": {
+    "firstTime": [
+      "Welcome to CADemy! Start by adding a basic shape from the left panel.",
+      "Try rotating the view by dragging with your left mouse button.",
+      "Click on objects to select them and see their properties on the right."
+    ],
+    "challengeMode": [
+      "Read the challenge objectives carefully before starting.",
+      "Use the hint button if you get stuck on a step.",
+      "Remember to consider the real-world context of assistive technology."
+    ],
+    "playground": [
+      "Experiment freely! There are no wrong answers in playground mode.",
+      "Try combining shapes with boolean operations.",
+      "Use the export feature to save your creations."
+    ]
+  }
+}

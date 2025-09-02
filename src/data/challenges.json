@@ -1,0 +1,207 @@
+{
+  "challenges": [
+    {
+      "id": 1,
+      "title": "CAD Basics: Your First Shape",
+      "description": "Learn the fundamentals by creating and modifying basic shapes",
+      "difficulty": "beginner",
+      "category": "tutorial",
+      "estimatedTime": "5 minutes",
+      "objectives": [
+        "Add a cube to the scene",
+        "Resize the cube to 2x2x2 units",
+        "Rotate the cube 45 degrees around the Y-axis (vertical)",
+        "Change the material to blue"
+      ],
+      "validationRules": {
+        "requiredObjects": ["cube"],
+        "rotationRequired": {
+          "axis": "y",
+          "degrees": 45
+        },
+        "scaleRequired": [2, 2, 2],
+        "materialColor": "#0000ff"
+      },
+      "hints": [
+        "Look for the cube button in the shapes panel",
+        "Use the scale tool or properties panel to resize to 2x2x2",
+        "Use the rotation tool and rotate around the Y-axis (vertical green arrow) by 45 degrees",
+        "Materials can be changed in the properties panel - look for blue color"
+      ],
+      "assistiveTechFocus": false
+    },
+    {
+      "id": 2,
+      "title": "Ergonomic Spoon for Arthritis",
+      "description": "Design an easy-grip spoon handle for users with arthritis",
+      "difficulty": "beginner",
+      "category": "assistive-tech",
+      "estimatedTime": "15 minutes",
+      "objectives": [
+        "Create a spoon bowl using a scaled sphere",
+        "Design a thick, ergonomic handle using a cylinder",
+        "Connect the bowl and handle smoothly",
+        "Ensure the handle diameter is at least 2cm for easy grip"
+      ],
+      "validationRules": {
+        "requiredObjects": ["sphere", "cylinder"],
+        "handleDiameter": 2.0,
+        "totalLength": [15, 20],
+        "connected": true
+      },
+      "hints": [
+        "Arthritis users need thicker handles for easier gripping",
+        "Use boolean union to connect parts seamlessly",
+        "Consider the weight distribution",
+        "Test different handle angles for comfort"
+      ],
+      "assistiveTechFocus": true,
+      "realWorldContext": "People with arthritis often struggle with thin utensil handles. Thicker handles reduce strain on joints."
+    },
+    {
+      "id": 3,
+      "title": "One-Handed Phone Stand",
+      "description": "Create a stable phone stand that can be operated with one hand",
+      "difficulty": "intermediate",
+      "category": "assistive-tech",
+      "estimatedTime": "20 minutes",
+      "objectives": [
+        "Design a stable base using geometric shapes",
+        "Create an angled phone rest at 60-70 degrees",
+        "Add a lip to prevent phone from sliding",
+        "Ensure the stand works for phones 4-7 inches tall"
+      ],
+      "validationRules": {
+        "baseStability": true,
+        "phoneAngle": [60, 70],
+        "phoneSupport": [4, 7],
+        "oneHandedOperation": true
+      },
+      "hints": [
+        "Wide base prevents tipping",
+        "Angle should be comfortable for viewing",
+        "Consider how someone would place/remove phone with one hand",
+        "Test with different phone sizes"
+      ],
+      "assistiveTechFocus": true,
+      "realWorldContext": "Users with limited mobility in one arm need stands they can operate independently."
+    },
+    {
+      "id": 4,
+      "title": "Adaptive Soap Holder",
+      "description": "Design a soap holder with finger slots for users with weak grip",
+      "difficulty": "intermediate",
+      "category": "assistive-tech",
+      "estimatedTime": "25 minutes",
+      "objectives": [
+        "Create a base tray for soap drainage",
+        "Add finger slots for easy gripping",
+        "Include drainage holes",
+        "Design for standard soap bar dimensions"
+      ],
+      "validationRules": {
+        "fingerSlots": 3,
+        "drainageHoles": true,
+        "soapFit": [8, 12],
+        "gripAccessibility": true
+      },
+      "hints": [
+        "Finger slots should be deep enough for secure grip",
+        "Drainage prevents soap from becoming slippery",
+        "Consider different hand sizes",
+        "Smooth edges prevent injury"
+      ],
+      "assistiveTechFocus": true,
+      "realWorldContext": "Users with conditions like Parkinson's or arthritis need secure grip options for daily hygiene."
+    },
+    {
+      "id": 5,
+      "title": "Wheelchair Cup Holder",
+      "description": "Design a cup holder that attaches to wheelchair armrests",
+      "difficulty": "advanced",
+      "category": "assistive-tech",
+      "estimatedTime": "30 minutes",
+      "objectives": [
+        "Create a secure cup holder ring",
+        "Design an adjustable clamp mechanism",
+        "Add safety features to prevent spills",
+        "Ensure compatibility with standard wheelchairs"
+      ],
+      "validationRules": {
+        "cupDiameters": [6, 10],
+        "clampRange": [2, 4],
+        "spillPrevention": true,
+        "adjustable": true
+      },
+      "hints": [
+        "Consider different cup sizes and shapes",
+        "Clamp should fit various armrest thicknesses",
+        "Anti-tip features are crucial",
+        "Easy one-handed operation is important"
+      ],
+      "assistiveTechFocus": true,
+      "realWorldContext": "Wheelchair users need accessible drink holders that don't interfere with mobility."
+    },
+    {
+      "id": 6,
+      "title": "Braille Learning Blocks",
+      "description": "Create tactile learning blocks with raised Braille patterns",
+      "difficulty": "advanced",
+      "category": "assistive-tech",
+      "estimatedTime": "35 minutes",
+      "objectives": [
+        "Design cube blocks with raised dots",
+        "Create accurate Braille letter patterns",
+        "Ensure proper dot spacing and height",
+        "Make blocks stackable and durable"
+      ],
+      "validationRules": {
+        "dotHeight": [0.5, 0.8],
+        "dotSpacing": 2.5,
+        "brailleAccuracy": true,
+        "stackable": true
+      },
+      "hints": [
+        "Braille dots must be precise for recognition",
+        "Standard Braille cell is 6 dots in 2x3 pattern",
+        "Dot height should be tactilely distinct",
+        "Consider manufacturing constraints"
+      ],
+      "assistiveTechFocus": true,
+      "realWorldContext": "Tactile learning tools help visually impaired individuals learn Braille effectively."
+    }
+  ],
+  "categories": {
+    "tutorial": {
+      "name": "Tutorial",
+      "description": "Learn CAD basics",
+      "color": "#10B981"
+    },
+    "assistive-tech": {
+      "name": "Assistive Technology",
+      "description": "Design for accessibility",
+      "color": "#3B82F6"
+    }
+  },
+  "progressionPath": [1, 2, 3, 4, 5, 6],
+  "achievements": [
+    {
+      "id": "first_design",
+      "name": "First Designer",
+      "description": "Complete your first challenge",
+      "icon": "🎯"
+    },
+    {
+      "id": "accessibility_advocate",
+      "name": "Accessibility Advocate",
+      "description": "Complete 3 assistive technology challenges",
+      "icon": "♿"
+    },
+    {
+      "id": "master_designer",
+      "name": "Master Designer",
+      "description": "Complete all challenges",
+      "icon": "🏆"
+    }
+  ]
+}
