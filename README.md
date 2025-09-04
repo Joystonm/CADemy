@@ -7,8 +7,6 @@ CADemy is an interactive web-based application designed to teach 3D modeling and
 - **Interactive 3D Environment**: Work with real 3D objects using professional-grade tools
 - **Progressive Learning**: Start with basic shapes and advance to complex assemblies
 - **Challenge-based Learning**: Learn through practical challenges that simulate real-world tasks
-- **Real-time Feedback**: Get instant feedback with helpful hints and suggestions
-- **Boolean Operations**: Learn CSG operations like union, subtract, and intersect
 - **Transform Controls**: Move, rotate, and scale objects with precision
 
 ## Technology Stack
@@ -20,27 +18,7 @@ CADemy is an interactive web-based application designed to teach 3D modeling and
 - **Tailwind CSS** - Responsive and modern styling
 - **Webpack** - Module bundling and development server
 
-## Project Structure
 
-```
-├── public/                   # Static assets
-├── src/
-│   ├── assets/              # Images, icons, sounds
-│   ├── components/          # Reusable UI components
-│   ├── scenes/              # Different application scenes
-│   ├── three/               # Three.js-specific functionality
-│   ├── data/                # Challenge data and presets
-│   ├── hooks/               # Custom React hooks
-│   ├── context/             # Global state management
-│   ├── styles/              # CSS and styling
-│   ├── pages/               # Route-level components
-│   ├── App.jsx              # Root component
-│   ├── main.jsx             # Application entry point
-│   └── router.jsx           # Routing configuration
-├── package.json
-├── webpack.config.js
-└── README.md
-```
 
 ## Getting Started
 
@@ -53,7 +31,7 @@ CADemy is an interactive web-based application designed to teach 3D modeling and
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone 
    cd CADemy
    ```
 
@@ -69,11 +47,6 @@ CADemy is an interactive web-based application designed to teach 3D modeling and
 
 4. Open your browser and navigate to `http://localhost:3000`
 
-### Available Scripts
-
-- `npm start` - Start the development server
-- `npm run build` - Build the project for production
-- `npm run dev` - Start development server with auto-open
 
 ## Usage
 
@@ -94,24 +67,4 @@ CADemy is an interactive web-based application designed to teach 3D modeling and
 - Interactive step-by-step instructions
 - Practice fundamental CAD concepts
 
-## Key Components
-
-### Three.js Integration
-- `CanvasWrapper.jsx` - Main 3D canvas component
-- `ObjectFactory.js` - Creates primitive 3D shapes
-- `TransformControls.js` - Handles object transformations
-- `BooleanOperations.js` - CSG operations (union, subtract, intersect)
-- `SceneUtils.js` - Utility functions for scene management
-
-### UI Components
-- `Navbar.jsx` - Main navigation
-- `Sidebar.jsx` - Tool selection panel
-- `ObjectPanel.jsx` - Shape library
-- `PropertiesPanel.jsx` - Object property editor
-- `Toolbar.jsx` - Quick action buttons
-
-### State Management
-- `AppContext.jsx` - Global application state
-- `SceneContext.jsx` - 3D scene state management
-- `useCADControls.js` - Custom hook for CAD operations
 
