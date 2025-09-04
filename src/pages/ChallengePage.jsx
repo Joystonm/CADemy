@@ -2,14 +2,28 @@ import React, { useState } from 'react';
 import ChallengeMode from '../scenes/ChallengeMode';
 import challengesData from '../data/challenges.json';
 import { useApp } from '../context/AppContext';
+import { useProgress } from '../context/ProgressContext';
 
 const ChallengePage = () => {
   const [selectedChallenge, setSelectedChallenge] = useState(null);
   const { completedChallenges, completeChallenge } = useApp();
+  const { completeChallenge: trackChallengeProgress, isUnlocked, getUnlockedChallenges } = useProgress();
 
-  const handleChallengeComplete = (result) => {
-    completeChallenge(result.challengeId);
-    setSelectedChallenge(null);
+  const unlockedChallenges = getUnlockedChallenges();
+
+  const handleChallengeComplete = async (result) => {
+    console.log('Challenge completed! Result:', result);
+    
+    try {
+      completeChallenge(result.challengeId);
+      console.log('Calling trackChallengeProgress...');
+      await trackChallengeProgress(result.challengeId);
+      console.log('trackChallengeProgress finished successfully');
+      setSelectedChallenge(null);
+    } catch (error) {
+      console.error('Error completing challenge:', error);
+      setSelectedChallenge(null);
+    }
   };
 
   const handleExitChallenge = () => {
@@ -82,20 +96,16 @@ const ChallengePage = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {challenges.map((challenge) => {
                   const isCompleted = completedChallenges.includes(challenge.id);
-                  const isLocked = challenge.id > 1 && !completedChallenges.includes(challenge.id - 1);
 
                   return (
                     <div 
                       key={challenge.id} 
-                      className={`bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 ${
-                        isLocked ? 'opacity-60' : ''
-                      }`}
+                      className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer"
                     >
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-3">
                           <h3 className="text-xl font-semibold flex items-center">
                             {isCompleted && <span className="text-green-500 mr-2">✓</span>}
-                            {isLocked && <span className="text-gray-400 mr-2">🔒</span>}
                             {challenge.title}
                           </h3>
                           <div className="flex space-x-1">
@@ -146,16 +156,13 @@ const ChallengePage = () => {
                         
                         <button
                           onClick={() => setSelectedChallenge(challenge)}
-                          disabled={isLocked}
                           className={`w-full py-2 px-4 rounded font-medium transition-colors ${
-                            isLocked
-                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                              : isCompleted
+                            isCompleted
                               ? 'bg-green-500 hover:bg-green-600 text-white'
                               : 'bg-blue-600 hover:bg-blue-700 text-white'
                           }`}
                         >
-                          {isLocked ? 'Locked' : isCompleted ? 'Replay Challenge' : 'Start Challenge'}
+                          {isCompleted ? 'Replay Challenge' : 'Start Challenge'}
                         </button>
                       </div>
                     </div>

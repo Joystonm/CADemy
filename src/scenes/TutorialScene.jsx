@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import CanvasWrapper from '../three/CanvasWrapper'
 import Toolbar from '../components/Toolbar'
 import { useScene } from '../context/SceneContext'
+import { useProgress } from '../context/ProgressContext'
 
 const TutorialScene = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const [isInteractive, setIsInteractive] = useState(false)
   const { addObject } = useScene()
+  const { completeTutorial } = useProgress()
 
   const tutorialSteps = [
     {
@@ -175,7 +177,9 @@ const TutorialScene = () => {
     setCurrentStep(0)
   }
 
-  const handleNextStep = () => {
+  const handleNextStep = async () => {
+    console.log('handleNextStep called, currentStep:', currentStep, 'totalSteps:', tutorialSteps.length);
+    
     const step = tutorialSteps[currentStep]
     if (step.action) {
       step.action()
@@ -183,6 +187,15 @@ const TutorialScene = () => {
     
     if (currentStep < tutorialSteps.length - 1) {
       setCurrentStep(currentStep + 1)
+    } else {
+      // Tutorial completed - track progress
+      console.log('Tutorial completed! Calling completeTutorial...');
+      try {
+        await completeTutorial('basic-tutorial');
+        console.log('completeTutorial finished successfully');
+      } catch (error) {
+        console.error('Error completing tutorial:', error);
+      }
     }
   }
 

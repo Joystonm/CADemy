@@ -1,0 +1,9 @@
+{
+  "name": "progress-calculation",
+  "version": "1.0.0",
+  "description": "Calculate user progress and unlock achievements",
+  "main": "src/main.js",
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  }
+}

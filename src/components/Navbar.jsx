@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const location = useLocation();
   const { completedChallenges } = useApp();
+  const { user, logout } = useAuth();
+
+  // Don't render navbar if user is not logged in
+  if (!user) {
+    return null;
+  }
 
   const navItems = [
-    { path: '/', name: 'Home', icon: '🏠', color: 'from-blue-500 to-blue-600' },
-    { path: '/tutorial', name: 'Tutorial', icon: '📚', color: 'from-green-500 to-green-600' },
-    { path: '/challenges', name: 'Challenges', icon: '🏆', color: 'from-amber-500 to-amber-600' },
-    { path: '/playground', name: 'Playground', icon: '🎨', color: 'from-purple-500 to-purple-600' },
-    { path: '/about', name: 'About', icon: 'ℹ️', color: 'from-cyan-500 to-cyan-600' },
+    { path: '/', name: 'Home', icon: '🏠' },
+    { path: '/tutorial', name: 'Tutorial', icon: '📚' },
+    { path: '/challenges', name: 'Challenges', icon: '🏆' },
+    { path: '/playground', name: 'Playground', icon: '🎨' },
+    { path: '/about', name: 'About', icon: 'ℹ️' },
   ];
 
   const isActive = (path) => {
@@ -68,9 +75,19 @@ const Navbar = () => {
 
           {/* User Section */}
           <div className="flex items-center space-x-4">
-            <div className="hidden lg:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-600">Ready to Create</span>
+            <div className="flex items-center space-x-3">
+              <div className="hidden lg:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
+                <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">{user.name?.charAt(0)}</span>
+                </div>
+                <span className="text-sm font-medium text-gray-600">{user.name}</span>
+              </div>
+              <button
+                onClick={logout}
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                Logout
+              </button>
             </div>
           </div>
 
@@ -116,3 +133,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
