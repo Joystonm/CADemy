@@ -24,7 +24,9 @@ export const AuthProvider = ({ children }) => {
     try {
       const session = await account.get();
       setUser(session);
+      console.log('User authenticated:', session);
     } catch (error) {
+      console.log('No active session:', error.message);
       setUser(null);
     } finally {
       setLoading(false);
@@ -38,6 +40,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       return user;
     } catch (error) {
+      console.error('Login failed:', error);
       throw error;
     }
   };
@@ -47,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       const newUser = await account.create(ID.unique(), email, password, name);
       await login(email, password);
       
-      // Create user profile only if database exists
+      // Try to create user profile (optional)
       try {
         await databases.createDocument(
           DATABASE_ID,
@@ -60,12 +63,14 @@ export const AuthProvider = ({ children }) => {
             createdAt: new Date().toISOString()
           }
         );
+        console.log('User profile created successfully');
       } catch (dbError) {
         console.warn('Could not create user profile:', dbError.message);
       }
       
       return newUser;
     } catch (error) {
+      console.error('Registration failed:', error);
       throw error;
     }
   };
@@ -74,7 +79,11 @@ export const AuthProvider = ({ children }) => {
     try {
       await account.deleteSession('current');
       setUser(null);
+      console.log('User logged out successfully');
     } catch (error) {
+      console.error('Logout failed:', error);
+      // Even if logout fails, clear local state
+      setUser(null);
       throw error;
     }
   };

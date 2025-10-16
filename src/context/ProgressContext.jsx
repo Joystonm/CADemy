@@ -34,62 +34,51 @@ export const ProgressProvider = ({ children }) => {
     
     setLoading(true);
     
-    // First try to load from local storage
+    // Always try local storage first
     const localKey = `progress_${user.$id}`;
     const localProgress = localStorage.getItem(localKey);
     
     if (localProgress) {
-      const parsedProgress = JSON.parse(localProgress);
-      console.log('Loading from local storage:', parsedProgress);
-      setProgress(parsedProgress);
-      setLoading(false);
-      return;
+      try {
+        const parsedProgress = JSON.parse(localProgress);
+        console.log('Loading from local storage:', parsedProgress);
+        setProgress(parsedProgress);
+        setLoading(false);
+        return;
+      } catch (parseError) {
+        console.error('Error parsing local storage:', parseError);
+        localStorage.removeItem(localKey);
+      }
     }
     
+    // Create default progress
+    const defaultProgress = {
+      userId: user.$id,
+      completedTutorials: [],
+      completedChallenges: [],
+      totalXP: 0,
+      badges: []
+    };
+    
+    // Try database, but don't fail if it doesn't work
     try {
-      console.log('Fetching progress for user:', user.$id);
       const response = await databases.listDocuments(
         DATABASE_ID,
         USER_PROGRESS_COLLECTION_ID,
         [Query.equal('userId', user.$id)]
       );
       
-      console.log('Database response:', response);
-      
       if (response.documents.length > 0) {
-        console.log('Found existing progress:', response.documents[0]);
-        setProgress(response.documents[0]);
-        localStorage.setItem(localKey, JSON.stringify(response.documents[0]));
+        const dbProgress = response.documents[0];
+        setProgress(dbProgress);
+        localStorage.setItem(localKey, JSON.stringify(dbProgress));
       } else {
-        console.log('No progress found, creating new record');
-        const newProgress = await databases.createDocument(
-          DATABASE_ID,
-          USER_PROGRESS_COLLECTION_ID,
-          ID.unique(),
-          {
-            userId: user.$id,
-            completedTutorials: [],
-            completedChallenges: [],
-            totalXP: 0,
-            badges: []
-          }
-        );
-        console.log('Created new progress:', newProgress);
-        setProgress(newProgress);
-        localStorage.setItem(localKey, JSON.stringify(newProgress));
+        // No existing progress, use default
+        setProgress(defaultProgress);
+        localStorage.setItem(localKey, JSON.stringify(defaultProgress));
       }
     } catch (error) {
-      console.error('Database error:', error);
-      
-      // Create default progress only if no local storage exists
-      const defaultProgress = {
-        userId: user.$id,
-        completedTutorials: [],
-        completedChallenges: [],
-        totalXP: 0,
-        badges: []
-      };
-      console.log('Using default progress:', defaultProgress);
+      console.warn('Database unavailable, using local storage:', error.message);
       setProgress(defaultProgress);
       localStorage.setItem(localKey, JSON.stringify(defaultProgress));
     } finally {
@@ -106,16 +95,17 @@ export const ProgressProvider = ({ children }) => {
   }, [user, fetchProgress]);
 
   const saveProgress = async (updatedProgress) => {
+    if (!user?.$id) return;
+    
     const localKey = `progress_${user.$id}`;
     
-    // Always save to local storage first
+    // Always save to local storage
     localStorage.setItem(localKey, JSON.stringify(updatedProgress));
     console.log('Saved to local storage:', updatedProgress);
     
     // Try to save to database (optional)
     try {
       if (progress?.$id) {
-        console.log('Updating existing document:', progress.$id);
         await databases.updateDocument(
           DATABASE_ID,
           USER_PROGRESS_COLLECTION_ID,
@@ -128,28 +118,9 @@ export const ProgressProvider = ({ children }) => {
           }
         );
         console.log('Database updated successfully');
-      } else {
-        console.log('Creating new document');
-        const newDoc = await databases.createDocument(
-          DATABASE_ID,
-          USER_PROGRESS_COLLECTION_ID,
-          ID.unique(),
-          {
-            userId: user.$id,
-            completedTutorials: updatedProgress.completedTutorials,
-            completedChallenges: updatedProgress.completedChallenges,
-            totalXP: updatedProgress.totalXP,
-            badges: updatedProgress.badges
-          }
-        );
-        console.log('New document created:', newDoc);
-        // Update progress with database ID for future updates
-        const progressWithId = { ...updatedProgress, $id: newDoc.$id };
-        setProgress(progressWithId);
-        localStorage.setItem(localKey, JSON.stringify(progressWithId));
       }
     } catch (error) {
-      console.error('Database save failed, continuing with local storage:', error);
+      console.warn('Database save failed, continuing with local storage:', error.message);
     }
   };
 
