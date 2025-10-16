@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const location = useLocation();
   const { completedChallenges } = useApp();
-  const { user, logout } = useAuth();
-
-  // Don't render navbar if user is not logged in
-  if (!user) {
-    return null;
-  }
 
   const navItems = [
     { path: '/', name: 'Home', icon: '🏠' },
@@ -73,24 +66,6 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* User Section */}
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-3">
-              <div className="hidden lg:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
-                <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">{user.name?.charAt(0)}</span>
-                </div>
-                <span className="text-sm font-medium text-gray-600">{user.name}</span>
-              </div>
-              <button
-                onClick={logout}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button className="p-3 hover:bg-gray-100 rounded-xl transition-colors duration-200 group">
@@ -133,4 +108,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
